@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Lamda School Goes Viral',
+    date: 'Feb 17, 2020',
+    firstParagraph: `Ut videas mille milites armatis in campo ante te etc. Haw mit eynem slage von eyner weiden eynen czweyk und wasche yn in eynem flissendem wasser VII tage ante ortum solis, und sprich: Gribello, venite, venitis cum mille granditate, quaesso vos per Astaroth, quatenus veniatis cum milleno forte auxilio. Und wen du daz hast X gesprochen so nym dy ruten und slach sy III an dy erde und sprich X credo, czu hant hebe auf dy ruten, zo systu C ritter etc. mit vollem harnüsch etc.`,
+    secondParagraph: `Si vis, ut recedant, proice vel iacta virgulam super terram, et tunc nulli plus valebit illa virga etc.`,
+    thirdParagraph: `N|u spricht meister alkaym / |das dy erste herte / ist allermeist yn kaldem wasser |und dy ist gemeyne / |Und dy herte irkenne alzo / |wenne dy sneide blo ist zo hat is eyne rechte herte`
   }
 ];
 
@@ -112,3 +119,76 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function makeH2 (obj) {
+    const h2 = document.createElement('h2');
+    h2.textContent = obj.title;
+    return h2;
+}
+
+function makeDate (obj) {
+    const date = document.createElement('p');
+    date.classList.add('date');
+    date.textContent = obj.date;
+    return date;
+}
+
+function makeP (obj, num) {
+    const p = document.createElement('p');
+    switch (num) {
+        case 1:
+            p.textContent = obj.firstParagraph;
+            break;
+        case 2:
+            p.textContent = obj.secondParagraph;
+            break;
+        case 3:
+            p.textContent = obj.thirdParagraph;
+    }
+    return p;
+}
+
+function makeButton () {
+    const button = document.createElement('span');
+    button.classList.add('expandButton');
+    button.addEventListener('click',function () { pressButton(button) });
+    button.textContent = `Show More`;
+    return button;
+}
+
+function makeArticle (obj) {
+    console.log(`Making Article...`);
+    const article = document.createElement('div');
+    article.classList.add('article');
+    
+    const h2 = makeH2(obj);
+    const date = makeDate(obj);
+    const p1 = makeP(obj,1);
+    const p2 = makeP(obj,2);
+    const p3 = makeP(obj,3);
+    const btn = makeButton();
+    
+    article.appendChild(h2);
+    article.appendChild(date);
+    article.appendChild(p1);
+    article.appendChild(p2);
+    article.appendChild(p3);
+    article.appendChild(btn);
+    
+    return article;
+}
+
+function pressButton (btn) {
+    console.log(btn);
+    console.log(btn.parentElement);
+    if (btn.parentElement.classList.contains('article-open')) {
+        btn.parentElement.classList.remove('article-open');
+        btn.textContent = `Show More`;
+    } else {
+        btn.parentElement.classList.add('article-open');
+        btn.textContent = `Close`;
+    }
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach(function (a) { articles.appendChild(makeArticle(a)); });
