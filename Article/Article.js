@@ -203,8 +203,8 @@ function makeArticle (obj) {
 }
 
 function pressButton (btn) {
-    console.log(btn);
-    console.log(btn.parentElement);
+    //console.log(btn);
+    //console.log(btn.parentElement);
     btn.parentElement.style.transition = `all 1s`;
     if (btn.parentElement.classList.contains('article-open')) {
         btn.parentElement.classList.remove('article-open');
@@ -224,4 +224,84 @@ const articles = document.querySelector('.articles');
 
 data.forEach((a) => articles.appendChild(makeArticle(a)));
 
-//stretch
+//stretch: form
+function makeForm () {
+  const form = document.createElement('form');
+  form.classList.add('article');
+  form.style.height = `550px`;
+  const formTitle = document.createElement('h2');
+  formTitle.textContent = `Add an Article`;
+  const titleLabel = document.createElement('label');
+  titleLabel.textContent = `Title: `;
+  const titleField = document.createElement('input');
+  const spacer = document.createElement('span');
+  spacer.textContent = ` `;
+  spacer.style.width = `10%`;
+  spacer.style.display = `inline-block`;
+  const dateLabel = document.createElement('label');
+  dateLabel.textContent = `Date: `;
+  const dateField = document.createElement('input');
+  dateField.type = 'date';
+  const p1Label = document.createElement('label');
+  p1Label.textContent = `First Paragraph: `;
+  const p1Field = document.createElement('textarea');
+  p1Field.style.width = `100%`;
+  p1Field.style.height = `100px`;
+  const p2Label = document.createElement('label');
+  p2Label.textContent = `Second Paragraph: `;
+  const p2Field = document.createElement('textarea');
+  p2Field.style.width = `100%`;
+  p2Field.style.height = `100px`;
+  const p3Label = document.createElement('label');
+  p3Label.textContent = `Third Paragraph: `;
+  const p3Field = document.createElement('textarea');
+  p3Field.style.width = `100%`;
+  p3Field.style.height = `100px`;
+  const submitBtn = document.createElement('submit');
+  submitBtn.textContent = `Submit`;
+  submitBtn.style.color = `blue`;
+  //form.onsubmit = `return submitForm()`;
+  submitBtn.addEventListener('click', ()=>submitForm(form));
+
+  form.appendChild(formTitle);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(titleLabel);
+  form.appendChild(titleField); //3
+  form.appendChild(spacer);
+  form.appendChild(dateLabel);
+  form.appendChild(dateField); //6
+  form.appendChild(document.createElement('br'));
+  form.appendChild(document.createElement('br'));
+  form.appendChild(p1Label);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(p1Field); //11
+  form.appendChild(document.createElement('br'));
+  form.appendChild(document.createElement('br'));
+  form.appendChild(p2Label);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(p2Field); //16
+  form.appendChild(document.createElement('br'));
+  form.appendChild(document.createElement('br'));
+  form.appendChild(p3Label);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(p3Field); //21
+  form.appendChild(document.createElement('br'));
+  form.appendChild(document.createElement('br'));
+  form.appendChild(submitBtn);
+
+  return form;
+}
+
+function submitForm (form) {
+  const date = new Date(form.children[6].value);
+  const options = { year: 'numeric', month: 'short', day: '2-digit'};
+  const _resultDate = new Intl.DateTimeFormat('en-US', options).format(date);
+  const formData = {title: form.children[3].value, date: _resultDate,
+                    firstParagraph: form.children[11].value, secondParagraph: form.children[16].value,
+                    thirdParagraph: form.children[21].value};
+  console.log(formData);
+  const newArticle = makeArticle(formData);
+  articles.insertBefore(newArticle, form);
+}
+
+articles.appendChild(makeForm());
