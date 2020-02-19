@@ -92,6 +92,20 @@ const data = [
     firstParagraph: `Ut videas mille milites armatis in campo ante te etc. Haw mit eynem slage von eyner weiden eynen czweyk und wasche yn in eynem flissendem wasser VII tage ante ortum solis, und sprich: Gribello, venite, venitis cum mille granditate, quaesso vos per Astaroth, quatenus veniatis cum milleno forte auxilio. Und wen du daz hast X gesprochen so nym dy ruten und slach sy III an dy erde und sprich X credo, czu hant hebe auf dy ruten, zo systu C ritter etc. mit vollem harnüsch etc.`,
     secondParagraph: `Si vis, ut recedant, proice vel iacta virgulam super terram, et tunc nulli plus valebit illa virga etc.`,
     thirdParagraph: `N|u spricht meister alkaym / |das dy erste herte / ist allermeist yn kaldem wasser |und dy ist gemeyne / |Und dy herte irkenne alzo / |wenne dy sneide blo ist zo hat is eyne rechte herte`
+  },
+  {
+    title: 'Lambda Lambda Lambda',
+    date: 'Feb 18, 2020',
+    firstParagraph: `Ut videas mille milites armatis in campo ante te etc. Haw mit eynem slage von eyner weiden eynen czweyk und wasche yn in eynem flissendem wasser VII tage ante ortum solis, und sprich: Gribello, venite, venitis cum mille granditate, quaesso vos per Astaroth, quatenus veniatis cum milleno forte auxilio. Und wen du daz hast X gesprochen so nym dy ruten und slach sy III an dy erde und sprich X credo, czu hant hebe auf dy ruten, zo systu C ritter etc. mit vollem harnüsch etc.`,
+    secondParagraph: `Si vis, ut recedant, proice vel iacta virgulam super terram, et tunc nulli plus valebit illa virga etc.`,
+    thirdParagraph: `N|u spricht meister alkaym / |das dy erste herte / ist allermeist yn kaldem wasser |und dy ist gemeyne / |Und dy herte irkenne alzo / |wenne dy sneide blo ist zo hat is eyne rechte herte`
+  },
+  {
+    title: 'Strawberry Pop-Tart Blowtorch',
+    date: 'Feb 17, 2020',
+    firstParagraph: `Ut videas mille milites armatis in campo ante te etc. Haw mit eynem slage von eyner weiden eynen czweyk und wasche yn in eynem flissendem wasser VII tage ante ortum solis, und sprich: Gribello, venite, venitis cum mille granditate, quaesso vos per Astaroth, quatenus veniatis cum milleno forte auxilio. Und wen du daz hast X gesprochen so nym dy ruten und slach sy III an dy erde und sprich X credo, czu hant hebe auf dy ruten, zo systu C ritter etc. mit vollem harnüsch etc.`,
+    secondParagraph: `Si vis, ut recedant, proice vel iacta virgulam super terram, et tunc nulli plus valebit illa virga etc.`,
+    thirdParagraph: `N|u spricht meister alkaym / |das dy erste herte / ist allermeist yn kaldem wasser |und dy ist gemeyne / |Und dy herte irkenne alzo / |wenne dy sneide blo ist zo hat is eyne rechte herte`
   }
 ];
 
@@ -150,7 +164,7 @@ function makeP (obj, num) {
 function makeButton () {
     const button = document.createElement('span');
     button.classList.add('expandButton');
-    button.addEventListener('click',function () { pressButton(button) });
+    button.addEventListener('click',() => pressButton(button));
     button.textContent = `Show More`;
     return button;
 }
@@ -191,4 +205,4 @@ function pressButton (btn) {
 
 const articles = document.querySelector('.articles');
 
-data.forEach(function (a) { articles.appendChild(makeArticle(a)); });
+data.forEach((a) => articles.appendChild(makeArticle(a)));
